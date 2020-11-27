@@ -2,62 +2,57 @@
 layout: docwithnav
 assignees:
 - ashvayka
-title: Entities and relations
-description: IoT asset management using ThingsBoard entities and relations feature
+title: Сущности и отношения
+description: Документация к IoT платформе Ростелеком
 
 ---
 
 * TOC
 {:toc}
 
-## Entities Overview
+## Сущности платформы
 
-ThingsBoard provides the user interface and REST APIs to provision and manage multiple entity types and their relations in your IoT application.
-Supported entities are:
+IoT платформа Ростелеком через пользовательский интерфейс и REST API позволяет работать со следующими сущностями и их взаимосвязями в IoT-приложениях:
  
- - **Tenants** - you can treat tenant as a separate business-entity: individual or organization who owns or produce devices and assets;
- Tenant may have multiple tenant administrator users and millions of customers;
- - **Customers** - customer is also a separate business-entity: individual or organization who purchase or uses tenant devices and/or assets;
- Customer may have multiple users and millions of devices and/or assets;
- - **Users** - users are able to browse dashboards and manage entities;
- - **Devices** - basic IoT entities that may produce telemetry data and handle RPC commands. For example sensors, actuators, switches;
- - **Assets** - abstract IoT entities that may be related to other devices and assets. For example factory, field, vehicle;      
- - **Alarms** - events that identify issues with your assets, devices or other entities;
- - **Dashboards** - visualization of your IoT data and ability to control particular devices through user interface; 
- - **Rule Node** - processing units for incoming messages, entity lifecycle events, etc;
- - **Rule Chain** - logic unit of related Rule Nodes;
+ - **Тенанты** - отдельные бизнес-субъекты, которые могут являться владельцами устройств, объектов и приложений или их производителями. В одном тенанте может быть несколько администраторов и множество клиентов;
+ - **Клиенты** - также отдельные бизнес-субъекты: физические лица или организации, которые приобретают или используют устройства и объекты тенанта. Каждый клиент может иметь множество пользователей и миллионы объектов и устройств;
+ - **Пользователи** - сущности IoT платформы, которые используют устройства и объекты платформы через дашборды и могут работать с получаемыми от них данными;
+ - **Устройства** - базовые сущности IoT-платформы. Устройства производят телеметрические данные и обрабатывают RPC (Remote Procedure Call) – команды. Например, датчики, приводы, реле;
+ - **Активы** - абстрактные сущности IoT платформы, которые могут включать в себя другие устройства и объекты. Например, предприятие, здание, транспортное средство;      
+ - **Сигналы тревоги** - тревожные события, которые возникают на устройстве, объекте или иной сущности IoT-платформы;
+ - **Дашборды** (панели мониторинга) - средство визуализации IoT данных и управления IoT устройствами через пользовательский интерфейс; 
+ - **Rule Node** (узел правил) - блок обработки входящих сообщений, например, событий жизненного цикла устройств, действий пользователей и т.п.;
+ - **Rule Chain** (цепочка правил) - логическая единица Rule Node (узла правил);
 
 
-Each entity supports:
+Каждая сущность поддерживает:
 
- - **Attributes** - static and semi-static key-value pairs associated with entities. For example serial number, model, firmware version;
- - **Telemetry data** - time-series data points available for storage, querying and visualization. For example temperature, humidity, battery level;
- - **Relations** - directed connections to other entities. For example contains, manages, owns, produces.
+ - **Атрибуты** - статические или полустатические пары «значение-ключ», связанные с сущностями IoT-платформы. Например, серийный номер, модель, версия прошивки;
+ - **Телеметрические данные** - временной ряд данных, доступный для хранения, визуализации и обработки. Например, температура, влажность, уровень заряда батареи и т.д.;
+ - **Отношения** - направленные связи с другими сущностями. Например, «содержит», «управляет», «владеет» и т.д..
  
-Additionally, devices and assets also have a type. This allows distinguising them and process data from them in a different way.
+Кроме того, устройства и объекты типизируются. Это позволяет различать их и управлять данными, поступаемыми с них, по различным сценариям.
    
-This guide provides the overview of the features listed above, some useful links to get more details and real-life examples of their usage.  
+Это руководство содержит обзор перечисленных выше функций, примеры их использования и ссылки для получения более подробной информации. 
 
-## Real-life application
+## Пример создания приложения
 
-The easiest way to understand the concepts of ThingsBoard is to implement your first ThingsBoard application. 
-Let's assume we want to build an application that collects data from soil moisture and temperature sensors, 
-visualize this data on the dashboard, detect issues, raise alarms and control the irrigation.
+Самый простой способ понять концепцию IoT платформы Ростелеком – создать пробное приложение на платформе. Предположим, мы хотим создать приложение, которое собирает данные с датчиков влажности и температуры почвы, визуализирует эти данные на дашборде, выявляет проблемы, генерирует сигналы тревоги и управляет поливом.
 
-Let's also assume we want to support multiple fields with hundreds of sensors. Fields may be also grouped to the Geo regions.
- 
-We believe there should be following logical steps to build such an application:
+Предположим также, что мы хотим поддерживать несколько полей с помощью сотен датчиков. Поля могут быть сгруппированы в географические зоны.
 
-### Step 1: Provision entities and relations
+Для создания такого приложения должны быть предприняты следующие шаги: 
 
-We are going to setup following hierarchy of assets and devices:
+### Шаг 1: Создание сущностей и отношений
+
+Мы собираемся настроить следующую иерархию объектов и устройств:
 
 
  ![image](/images/user-guide/entities-and-relations.svg)
  
  
-Please review the following screen cast to learn how to provision region and fields assets and their relations using ThingsBoard Web UI
-
+Просмотрите приведенную ниже запись экрана, чтобы узнать, как подготовить объекты и их отношения с помощью веб-интерфейса платформы 
+  
   
 <div id="video">
     <div id="video_wrapper">
@@ -65,7 +60,7 @@ Please review the following screen cast to learn how to provision region and fie
     </div>
 </div>
 
-Please review the following screen cast to learn how to provision devices and their relations with assets using ThingsBoard Web UI
+Просмотрите приведенную ниже запись экрана, чтобы узнать, как настроить устройства и их отношения с объектами с помощью веб-интерфейса платформы 
 
 
 <div id="video">
@@ -74,23 +69,22 @@ Please review the following screen cast to learn how to provision devices and th
     </div>
 </div>
 
-You can automate this actions using ThingsBoard REST API. You can provision new asset using POST request to the following URL
+Вы можете автоматизировать эти действия с помощью REST API. Вы можете подготовить новый актив с помощью POST-запроса по следующему URL-адресу
 
 ```shell 
 http(s)://host:port/api/asset
 ```
 
-For example:
+Например:
 
 {% capture tabspec %}create-asset
 A,create-asset.sh,shell,resources/create-asset.sh,/docs/user-guide/resources/create-asset.sh
 B,create-asset.json,json,resources/create-asset.json,/docs/user-guide/resources/create-asset.json{% endcapture %}  
 {% include tabs.html %}
 
-**Note:** in order to execute this request, you will need to substitute **$JWT_TOKEN** with a valid JWT token.
-This token should belong to a user with **TENANT_ADMIN** role. You can use following [guide](/docs/reference/rest-api/#rest-api-auth) to get the token.
+**Примечание:** чтобы выполнить этот запрос, вам нужно будет заменить **$JWT_TOKEN** действительным токеном JWT. Этот токен должен принадлежать пользователю с ролью **TENANT_ADMIN**. Используйте [руководство](/docs/reference/rest-api/#rest-api-auth), чтобы узнать, как получить токен.
 
-Also, you can provision new relation using POST request to the following URL
+Кроме того, вы можете создавать новые отношения с помощью запроса POST по следующему URL-адресу
 
 ```shell 
 http(s)://host:port/api/relation
@@ -103,33 +97,29 @@ A,create-relation.sh,shell,resources/create-relation.sh,/docs/user-guide/resourc
 B,create-relation.json,json,resources/create-relation.json,/docs/user-guide/resources/create-relation.json{% endcapture %}  
 {% include tabs.html %}
 
-**Note:** Don't forget to replace $FROM_ASSET_ID and $TO_ASSET_ID with valid asset ids. 
-**Note:** One can relate any entities. For example, assets to devices or assets to users.
-You can receive them as a result of previous REST API call or use Web UI.
+**Примечание:** не забудьте заменить $FROM_ASSET_ID и $TO_ASSET_ID действительными идентификаторами актива. 
+**Примечание:** можно связать любые сущности. Например, активы и устройства или активы и пользователей. Вы можете сделать это в результате вызова REST API или использовать веб-интерфейс.
 
 
-### Step 2: Assign attributes to the assets
+### Шаг 2: Назначение атрибутов активам
 
-ThingsBoard provides the ability to assign attributes to entities and manage them.
-This topic is covered in separate guide.    
-<p><a href="/docs/user-guide/attributes" class="button">Working with device attributes</a></p>
+Платформа дает возможность назначать атрибуты сущностям и управлять ими. Этот процесс рассматривается в отдельной статье.    
+<p><a href="/docs/user-guide/attributes" class="button">Работа с атрибутами устройств</a></p>
 
 
-### Step 3: Upload telemetry data from devices
+### Шаг 3: Получение телеметрических данных с устройств
 
-ThingsBoard provides the ability to work with telemetry data for devices and other entities.
-This topic is covered in separate guide.    
-<p><a href="/docs/user-guide/telemetry" class="button">Working with telemetry data</a></p>
+Платформа дает возможность работать с телеметрическими данными с устройств и других сущностей. Этот процесс рассматривается в отдельной статье.    
+<p><a href="/docs/user-guide/telemetry" class="button">Работа с телеметрическими данными</a></p>
 
-### Step 4: Creating Rules for Alarms
+### Шаг 4: Создание правил для сигналов тревоги
 
-ThingsBoard provides the ability to raise alarms using rule engine for devices and other entities.
-This topic is covered in the separate guide.    
-<p><a href="/docs/user-guide/alarms" class="button">Working with alarms</a></p>
+TПлатформа дает возможность генерировать сигналы тревоги с помощью движка правил для устройств и других сущностей. Этот процесс рассматривается в отдельной статье.  
+<p><a href="/docs/user-guide/alarms" class="button">Работа с сигналами тревоги</a></p>
 
-### Step 5: Design your dashboard
+### Шаг 5: Создание дашбордов
 
-Please [import](/docs/user-guide/ui/dashboards/#dashboard-import) the following [**dashboard**](/docs/user-guide/resources/region_fields_dashboard.json) that demonstrates Map, Alarm, Entity Table and Charts widgets.
+[Импортируйте](/docs/user-guide/ui/dashboards/#dashboard-import) этот [**дашборд**](/docs/user-guide/resources/region_fields_dashboard.json) на котором можно увидеть следующие виджеты: «Карта», «Сигналы тревоги», «Таблица сущностей» и «Графики».
 
 
  
